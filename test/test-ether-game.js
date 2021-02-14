@@ -77,5 +77,15 @@ describe("EtherGame", function() {
             }
         });
     });
+    describe('Testing getBalance function', () => {
+        it('Returns 0 when nothing happens', async () => {
+            expect(await etherGame.getBalance()).to.equal(0);
+        });
+        it('Returns 1 ether after person deposits 1 ether', async () => {
+            await etherGame.connect(accounts[0]);
+            await etherGame.deposit({value: ethers.utils.parseEther("1.0")});
+            expect(await etherGame.getBalance()).to.equal(ethers.utils.parseEther("1.0"));
+        });
+    });
   
 });
